@@ -1,4 +1,4 @@
-import {  setDoc, doc, getDoc, updateDoc } from "firebase/firestore";
+import { setDoc, doc, getDoc, updateDoc } from "firebase/firestore";
 import { db } from "../firebase";
 
 export const addSymptom = (userId, symptoms) => {
@@ -16,9 +16,19 @@ export const updateSymptoms = (userId, symptoms) => {
     symptoms,
   });
 };
-export const updateSymptomCauses = (userId, symptomCauses, additionalSymptomCauses) => {
+export const updateSymptomCauses = (
+  userId,
+  symptomCauses,
+  additionalSymptomCauses
+) => {
   return updateDoc(doc(db, "symptoms", userId), {
     symptomCauses,
     additionalSymptomCauses,
+  });
+};
+
+export const updateNotifications = (userId, notifications) => {
+  return updateDoc(doc(db, "notifications", userId), {
+    notifications,
   });
 };

@@ -9,13 +9,10 @@ import NavBar from "../components/NavBar";
 import Filter from "../components/Filter";
 import NotificationRow from "./NotificationRow";
 
+import { updateNotifications } from "../../../api/symptoms";
+
 export default function Notifications() {
-  const {
-    currentUser,
-    addNotification,
-    getNotificationByUser,
-    updateNotifications,
-  } = useAuth();
+  const { currentUser, addNotification, getNotificationByUser } = useAuth();
   const [loading, setLoading] = useState(false);
   const [notifications, setNotifications] = useState({});
 
@@ -45,19 +42,19 @@ export default function Notifications() {
     get();
   }, []);
 
-  useEffect(() => {
-    const get = async () => {
-      setLoading(true);
-      try {
-        const response = await getNotificationByUser(currentUser.uid);
-        setNotifications(response.data().notifications);
-      } catch (error) {}
+  //   useEffect(() => {
+  //     const get = async () => {
+  //       setLoading(true);
+  //       try {
+  //         const response = await getNotificationByUser(currentUser.uid);
+  //         setNotifications(response.data().notifications);
+  //       } catch (error) {}
 
-      setLoading(false);
-    };
+  //       setLoading(false);
+  //     };
 
-    get();
-  }, []);
+  //     get();
+  //   }, []);
 
   //------------------------------Update Notifications For User-------------------------------------//
   async function handleSubmit(e) {
@@ -68,15 +65,13 @@ export default function Notifications() {
       Type: "Group",
     };
 
-    const docsData = [
-      {
-        Timestamp: "11:59",
-        Text: "This is a random entry",
-        Avatar: "html....",
-        Type: "Group",
-      },
-    ];
-    console.log(docData);
+    const docsData = {
+      timeData: { Time: "11:59", Location: "User location" },
+      textData: { Description: "This is a random entry", Type: "Type" },
+      avatar: { username: "Brian", Avatar: "html...." },
+      groups: { Primary: "Group", Secondary: "Stuff" },
+    };
+    console.log(docsData);
     e.preventDefault();
     try {
       await updateNotifications(currentUser.uid, docsData);

@@ -17,6 +17,7 @@ export default function SymptomForm({ initialValues, page }) {
     defaultValues: initialValues,
   });
   const onSubmit = async (data) => {
+    console.log(data);
     setLoading(true);
     try {
       await updateSymptoms(currentUser.uid, data);

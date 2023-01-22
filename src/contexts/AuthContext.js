@@ -111,10 +111,8 @@ export function AuthProvider({ children }) {
     });
   }
 
-  function updateNotifications(userId, notifications) {
-    return updateDoc(doc(db, "notifications", userId), {
-      notifications,
-    });
+  function updateNotifications(userId) {
+    return updateDoc(doc(db, "notifications", userId), {});
   }
 
   function getNotificationByUser(userId) {
